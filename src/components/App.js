@@ -3,8 +3,18 @@ import '../styles/App.scss';
 
 
 function App() {
+  const renderSolutionLetters = () => {
+
+    const wordLetters = word.split(setWord());
+    console.log(`hola soy ${wordLetters}`);
+    // wordLetters.map((eachWord) => (
+    //   <li key={eachword} className="letter">{eachWord}</li>
+    // ))
+  };
   const [numberOfErrors, setNumberOfErrors] = useState(0);
   const [lastLetter, setLastLetter] = useState(''); // lo ponemos vacío pq al cargar no hay nada
+  const [word, setWord] = useState('katacroker');
+  const [userLetters, setUserLetters] = useState([]);
 
 
   const handleClick = (event) => {
@@ -15,7 +25,16 @@ function App() {
 
   const handleLastLetter = (event) => {
     const valueInput = event.target.value;
-    setLastLetter(valueInput);
+
+    let htmlPattern = /^[a-zA-ZñÑá-úÁ-Ú´]$/; //función test que devuelve si es true o false, y comprueba si el input (entre paréntesis) coindice con la expresión regular. Si añadimos un más antes del dolar podríamos escribir más letras
+    if (htmlPattern.test(valueInput)) {
+      setLastLetter(valueInput);
+    } else {
+      setLastLetter('');
+      console.log('no funciona')
+    }
+
+
     console.log(valueInput);
   }
 
@@ -28,17 +47,8 @@ function App() {
         <section>
           <div className="solution">
             <h2 className="title">Solución:</h2>
-            <ul className="letters">
-              <li className="letter">k</li>
-              <li className="letter">a</li>
-              <li className="letter"></li>
-              <li className="letter">a</li>
-              <li className="letter">k</li>
-              <li className="letter">r</li>
-              <li className="letter"></li>
-              <li className="letter">k</li>
-              <li className="letter">e</li>
-              <li className="letter">r</li>
+
+            <ul className="letters" onChange={renderSolutionLetters}>
             </ul>
           </div>
           <div className="error">
