@@ -4,12 +4,21 @@ import '../styles/App.scss';
 
 function App() {
   const [numberOfErrors, setNumberOfErrors] = useState(0);
+  const [lastLetter, setLastLetter] = useState(''); // lo ponemos vacío pq al cargar no hay nada
+
 
   const handleClick = (event) => {
     event.preventDefault();
     setNumberOfErrors(numberOfErrors + 1);
 
   }
+
+  const handleLastLetter = (event) => {
+    const valueInput = event.target.value;
+    setLastLetter(valueInput);
+    console.log(valueInput);
+  }
+
   return (
     <div className="page">
       <header>
@@ -51,6 +60,8 @@ function App() {
               type="text"
               name="last-letter"
               id="last-letter"
+              onChange={handleLastLetter}
+              value={lastLetter}
             />
             <button onClick={handleClick}>Incrementar</button>
           </form>
